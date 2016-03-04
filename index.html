@@ -1,0 +1,154 @@
+<html>
+<head>
+  <title>Shutterstock API v2 PHP Sample Code</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="/search/styles.css" />
+
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
+  <script src="/search/script.js"></script>
+  <script src="/oauth/oauthpopup.js"></script>
+</head>
+
+<body>
+  <div class="container col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="well col-xs-12 col-sm-4 col-md-4 col-lg-3">
+      <h4 class="lead">
+        <img src="http://s4.picdn.net/images/ss-logo-color-2x_rev1.png" class="shutterstock-logo" alt="API Demo" title="API Demo"/>
+        <small>API Demo</small>
+      </h4>
+      <form id="search-form" method="get">
+        <div class="form-group form-group-sm row">
+          <label class="col-xs-12 col-sm-6 col-md-6 col-lg-6 control-label" for="query">Search query:</label>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <input id="query" name="query" value="restaurant" placeholder="romantic restaurant" list="query-suggestions" class="form-control"/>
+            <datalist id="query-suggestions">
+              <option>restaurant</option>
+              <option>spa</option>
+              <option>vacation</option>
+              <option>pizza</option>
+            </datalist>
+          </div>
+        </div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOptions">
+              <h4 class="panel-title">Example Parameters <i class="fa fa-gears"></i></h4>
+            </div>
+            <div class="panel-collapse">
+              <div class="panel-body">
+                <div class="form-horizontal form-group-sm">
+                  <div class="form-group hide" hidden>
+                    <label for="safe" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Safe Search:</label>
+                    <select id="safe" name="safe" class="btn col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <option value="true" selected>On</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="image_type" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Image Type:</label>
+                    <select multiple id="image_type" name="image_type" class="multiselect col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <option value="any">Any</option>
+                      <option value="photo" selected>Photo</option>
+                      <option value="illustration">Illustration</option>
+                      <option value="vector">Vector</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="orientation" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Orientation:</label>
+                    <select id="orientation" name="orientation" class="btn col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <option value="any">Any</option>
+                      <option value="vertical"> Vertical </option>
+                      <option value="horizontal" selected> Horizontal </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="category" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Category:</label>
+                    <select id="category" name="category" class="btn col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <option value="any" selected>Any</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="people_number" class="col-xs-6 col-sm-6 col-md-6 col-lg-6"># People:</label>
+                    <select id="people_number" name="people_number" class="btn col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <option value="any" selected>Any</option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4+</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="color" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">Color Search:</label>
+                    <input id="color" name="color" type="color" value="#000000" />
+                  </div>
+                  <div class="form-group">
+                    <label for="page" class="col-xs-3 col-sm-3 col-md-3 col-lg-7">Page:</label>
+                    <select id="page" name="page" class="btn col-xs-3 col-sm-3 col-md-3 col-lg-5">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                    <label for="per_page" class="col-xs-3 col-sm-3 col-md-3 col-lg-7">Per Page:</label>
+                    <select id="per_page" name="per_page" class="btn col-xs-3 col-sm-3 col-md-3 col-lg-5">
+                      <option value="3">3</option>
+                      <option value="9" selected>9</option>
+                      <option value="12">12</option>
+                      <option value="18">18</option>
+                      <option value="24">24</option>
+                      <option value="28">28</option>
+                      <option value="48">48</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button id="submit" name="submit" type="submit" class="btn btn-primary pull-right">Search <i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="col-xs-12 col-md-8 col-md-8 col-lg-9">
+      <h4 class="lead">Images</h4>
+      <hr />
+      <div id="search-results">
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail template -->
+  <div class="detail-template modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">x</button>
+          <h3 class="lead"></h3>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="purchase">Purchase this image</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Purchase template -->
+  <div class="purchase-template modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">x</button>
+          <h3 class="lead"></h3>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

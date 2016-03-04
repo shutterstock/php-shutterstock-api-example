@@ -1,0 +1,17 @@
+.shutterstock-logo {
+  width: 50%;
+}
+div.image-float-wrapper {
+  float: left;
+  min-height: 160px;
+  min-width: 170px;
+  padding: 0 10px 10px 0;
+  text-align: center;
+}
+div.image img {
+  cursor: pointer;
+}
+div.thumbnail-crop {
+  overflow: hidden;
+  margin: 0 auto;
+}
